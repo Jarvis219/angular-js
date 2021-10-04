@@ -1,8 +1,5 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MessengerComponent } from './screen/messenger/messenger.component';
-import { PostsComponent } from './screen/main/posts/posts.component';
-import { SignUpComponent } from './screen/sign-up/sign-up.component';
 const routes: Routes = [
   {
     path: '',

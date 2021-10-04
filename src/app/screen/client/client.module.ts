@@ -15,6 +15,7 @@ import { SideBarMenuComponent } from '../main/side-bar-menu/side-bar-menu.compon
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { StoryComponent } from '../main/story/story.component';
 import { TimeDistancePipe } from 'src/app/pipes/time-distance.pipe';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TimeDistancePipe } from 'src/app/pipes/time-distance.pipe';
     MainComponent,
     SignUpComponent,
     TimeDistancePipe,
+    UserProfileComponent
   ],
   imports: [CommonModule, ClientRoutingModule],
 })
