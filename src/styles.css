@@ -418,7 +418,6 @@ img { max-width: 100%; }
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
-
     width: 100%;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -520,13 +519,13 @@ img { max-width: 100%; }
 .post__name--underline:hover {
     text-decoration: underline;
 }
-.post__date-time {
+
+.post__infos .post__date-time {
     font-size: 10px;
     font-weight: 400;
     color: var(--text-light);
     text-transform: uppercase;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgb(184, 184, 184);
+    padding-bottom: 5px;
 }
 
 /* Side Menu */
@@ -887,4 +886,3 @@ img { max-width: 100%; }
     background: #555; 
   }
 /*---End Custom Scrollbar---*/
-
