@@ -52,12 +52,12 @@ export class SignUpComponent implements OnInit {
         password: this.userForm.value.password,
       },
     ];
-    if (!this.matchPassword || this.countEmail !== 0) {
+    if (this.countEmail !== 0) {
       return;
     }
+
     this.userService.register(this.user).subscribe(
       (data: UserModel[]) => {
-        console.log(data);
         const { message }: any = data;
         this.message = message;
         const { emailToken }: any = data;
