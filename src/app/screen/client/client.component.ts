@@ -15,7 +15,7 @@ export class ClientComponent implements OnInit {
 
   private checkUser(): void {
     if (!this.userService.getID()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }
   }
 }
