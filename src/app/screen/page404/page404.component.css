@@ -12,10 +12,9 @@
 
 body {
   background: #dedede;
+  min-height: 0vh;
 }
-.page-wrap {
-  min-height: 100vh;
-}
+
 /*======================
     404 page
 =======================*/

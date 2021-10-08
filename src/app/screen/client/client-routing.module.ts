@@ -23,7 +23,6 @@ const routes: Routes = [
   },
   { path: 'active-email', component: ActiveEmailComponent },
   { path: 'page-404', component: Page404Component },
-  // { path: 'profile', component:  },
   {
     path: '**',
     redirectTo: '/page-404',
