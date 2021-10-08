@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
@@ -8,7 +9,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClientComponent implements OnInit {
   public check: boolean = true;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) // private auth: AuthService
+  {}
   ngOnInit(): void {
     this.checkUser();
   }
@@ -18,4 +23,11 @@ export class ClientComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  // canActivate(): boolean {
+  //   if (!this.auth.isAuthenticated()) {
+  //     this.router.navigate(['login']);
+  //     return false;
+  //   }
+  //   return true;
+  // }
 }
