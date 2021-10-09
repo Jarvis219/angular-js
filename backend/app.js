@@ -3,7 +3,12 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 const app = express();
-
+const http = require('http');
+const server = http.createServer(app);
+const {
+  Server
+} = require("socket.io");
+const io = new Server(server);
 
 const authRouter = require('./Routes/auth');
 const userRouter = require('./Routes/user');
@@ -38,6 +43,10 @@ app.use('/api', statusRouter);
 app.use('/api', likeRouter);
 app.use('/api', commentRouter);
 app.use('/api', friendRouter);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
 
 const port = process.env.PORT || 8000
 app.listen(port, () => {

@@ -17,7 +17,6 @@ const routes: Routes = [
       { path: '', component: MainComponent },
       { path: 'messenger', component: MessengerComponent },
       { path: 'profile/:id', component: UserProfileComponent },
-      { path: 'page-404', component: Page404Component },
     ],
     canActivate: [GuardService],
   },
