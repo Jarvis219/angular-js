@@ -8,14 +8,17 @@ import {
   updateStatus,
   profilePosts
 } from '../Controllers/statusControllers';
+import {
+  authToken
+} from '../Middleware/authenToken'
 const router = express.Router();
 
-router.get('/post/profile', profilePosts);
-router.get('/post', listStatus);
-router.get('/post/detail/:postID', statusDetail);
-router.post('/post/create', createStatus);
-router.put('/post/update/:postID', updateStatus);
-router.delete('/post/remove/:postID', removeStatus);
+router.get('/post/profile', authToken, profilePosts);
+router.get('/post', authToken, listStatus);
+router.get('/post/detail/:postID', authToken, statusDetail);
+router.post('/post/create', authToken, createStatus);
+router.put('/post/update/:postID', authToken, updateStatus);
+router.delete('/post/remove/:postID', authToken, removeStatus);
 
 router.param('postID', statusID);
 

@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommentModel } from '../model/comment-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.getItem('token'),
+  });
+
   constructor(private http: HttpClient) {}
 
   public createComment(data: CommentModel[]): Observable<CommentModel[]> {
@@ -20,11 +25,13 @@ export class CommentService {
     data: CommentModel[]
   ): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/update/${id}`;
-    return this.http.put<CommentModel[]>(url, data[0]);
+    return this.http.put<CommentModel[]>(url, data[0], {
+      headers: this.headers,
+    });
   }
 
   public removeComment(id: string): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/remove/${id}`;
-    return this.http.delete<CommentModel[]>(url);
+    return this.http.delete<CommentModel[]>(url, { headers: this.headers });
   }
 }

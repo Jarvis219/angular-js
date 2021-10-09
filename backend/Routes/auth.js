@@ -6,6 +6,7 @@ import {
   signout,
   checkActiveEmail
 } from '../Controllers/auth';
+
 const router = express.Router();
 
 // đăng ký
