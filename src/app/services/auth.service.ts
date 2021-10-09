@@ -6,13 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   constructor(private userService: UserService) {}
-  // public isAuthenticated(): boolean {
-  //   const token = this.userService.getID();
-  //   console.log(token);
-  //   // Check whether the token is expired and return
-  //   // true or false
-  //   return !this.jwtHelper.isTokenExpired(token!);
-  // }
+
   public isAuthenticated(): boolean {
     const token = this.userService.getToken();
     const jwtHelper = new JwtHelperService();

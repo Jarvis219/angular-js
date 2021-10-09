@@ -41,14 +41,9 @@ export class LoginComponent implements OnInit {
     ];
     this.userService.signIn(this.user).subscribe(
       (data: any) => {
-        this.userService
-          .updateProfile(data.user._id, [{ activeStatus: true }])
-          .subscribe((data: any) => {
-            this.userService.setActive(data.activeStatus);
-          });
         this.userService.setToken(data.token);
         this.userService.setID(data.user._id);
-        this.router.navigate(['/']);
+        this.setActive(data.user._id);
       },
       (err: any) => {
         let { error } = err;
@@ -57,11 +52,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // validateEmail(email: string) {
-  //   const re =
-  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   return re.test(String(email).toLowerCase());
-  // }
+  private setActive(id: string): void {
+    if (!localStorage.getItem('token')) return;
+    this.userService
+      .updateProfile(id, [{ activeStatus: true }])
+      .subscribe((data: any) => {
+        this.userService.setActive(data.activeStatus);
+      });
+    this.router.navigate(['/']);
+  }
 
   get email() {
     return this.userForm.controls;
