@@ -17,14 +17,14 @@ const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'messenger', component: MessengerComponent },
-      { path: 'register', component: SignUpComponent },
-      { path: 'login', component: LoginComponent },
       { path: 'profile/:id', component: UserProfileComponent },
+      { path: 'page-404', component: Page404Component },
     ],
-    // canActivate: [GuardService],
+    canActivate: [GuardService],
   },
+  { path: 'register', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'active-email', component: ActiveEmailComponent },
-  { path: 'page-404', component: Page404Component },
   // { path: 'profile', component:  },
   {
     path: '**',

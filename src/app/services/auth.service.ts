@@ -5,10 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private jwtHelper: JwtHelperService,
-    private userService: UserService
-  ) {}
+  constructor(private userService: UserService) {}
   // public isAuthenticated(): boolean {
   //   const token = this.userService.getID();
   //   console.log(token);
@@ -16,14 +13,10 @@ export class AuthService {
   //   // true or false
   //   return !this.jwtHelper.isTokenExpired(token!);
   // }
-  autoLogin() {
-    const userData: string = this.userService.getToken();
-
-    if (!userData) {
-      return;
-    }
-    if (this.jwtHelper.isTokenExpired(userData)) {
-      this.userService.setToken(userData);
-    }
+  public isAuthenticated(): boolean {
+    const token = this.userService.getToken();
+    const jwtHelper = new JwtHelperService();
+    if (token === null) return false;
+    return !jwtHelper.isTokenExpired(token);
   }
 }

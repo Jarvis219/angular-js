@@ -4,16 +4,13 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class GuardService implements OnInit {
+export class GuardService implements CanActivate {
   constructor(public auth: AuthService, public router: Router) {}
-  // canActivate(): boolean {
-  //   if (!this.auth.autoLogin()) {
-  //     this.router.navigate(['login']);
-  //     return false;
-  //   }
-  //   return true;
-  // }
-  ngOnInit() {
-    this.auth.autoLogin();
+  canActivate(): boolean {
+    if (!this.auth.isAuthenticated()) {
+      this.router.navigate(['login']);
+      return false;
+    }
+    return true;
   }
 }
