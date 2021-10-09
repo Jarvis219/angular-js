@@ -9,14 +9,18 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class FriendService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public getFriend(): Observable<FriendModel[]> {
     const url = `${environment.api}/friend`;
-    return this.http.get<FriendModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<FriendModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
   public findUser(id: String): Observable<FriendModel[]> {
     const url = `${environment.api}/friend/find-user?friend=${id}`;
-    return this.http.get<FriendModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<FriendModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 }

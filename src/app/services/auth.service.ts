@@ -1,4 +1,3 @@
-import { UserService } from 'src/app/services/user.service';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpHeaders } from '@angular/common/http';
@@ -6,17 +5,19 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   public isAuthenticated(): boolean {
-    const token = this.userService.getToken();
+    const token = sessionStorage.getItem('token');
     const jwtHelper = new JwtHelperService();
     if (token === null) return false;
     return !jwtHelper.isTokenExpired(token);
   }
-
-  static headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.getItem('token'),
-  });
+  public getHeader(): any {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    return new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  }
 }

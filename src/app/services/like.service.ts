@@ -9,30 +9,34 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class LikeService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public createLike(data: LikeModel[]): Observable<LikeModel[]> {
     const url = `${environment.api}/like/create`;
     return this.http.post<LikeModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 
   public detailLike(id: string): Observable<LikeModel[]> {
     const url = `${environment.api}/like/${id}`;
-    return this.http.get<LikeModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<LikeModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 
   public updateLike(id: String, data: LikeModel[]): Observable<LikeModel[]> {
     const url = `${environment.api}/like/update/${id}`;
     return this.http.put<LikeModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 
   public findLike(id: string): Observable<LikeModel[]> {
     const url = `${environment.api}/like/find?like=${id}`;
-    return this.http.get<LikeModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<LikeModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 
   public updateUserLike(
@@ -41,7 +45,7 @@ export class LikeService {
   ): Observable<LikeModel[]> {
     const url = `${environment.api}/like/update-like-user/${id}`;
     return this.http.put<LikeModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 }

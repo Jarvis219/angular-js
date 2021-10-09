@@ -14,12 +14,12 @@ export class CommentService {
     Authorization: 'Bearer ' + localStorage.getItem('token'),
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public createComment(data: CommentModel[]): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/create`;
     return this.http.post<CommentModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 
@@ -29,14 +29,14 @@ export class CommentService {
   ): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/update/${id}`;
     return this.http.put<CommentModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 
   public removeComment(id: string): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/remove/${id}`;
     return this.http.delete<CommentModel[]>(url, {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 }

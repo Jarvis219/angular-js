@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public register(data: UserModel[]): Observable<UserModel[]> {
     const url = `${environment.api}/signup`;
@@ -16,7 +16,7 @@ export class UserService {
   }
 
   public setToken(token: string): void {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   public setID(id: string): void {
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   public getToken(): string {
-    return localStorage.getItem('token')!;
+    return sessionStorage.getItem('token')!;
   }
 
   public getID(): string {
@@ -50,6 +50,7 @@ export class UserService {
   }
 
   public signOut(): Observable<UserModel[]> {
+    // localStorage.clear();
     localStorage.removeItem('active');
     localStorage.removeItem('id');
     localStorage.removeItem('token');
@@ -59,23 +60,29 @@ export class UserService {
 
   public profile(id: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/${id}`;
-    return this.http.get<UserModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<UserModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 
   public updateProfile(id: string, data: UserModel[]): Observable<UserModel[]> {
     const url = `${environment.api}/profile/update/${id}`;
     return this.http.put<UserModel[]>(url, data[0], {
-      headers: AuthService.headers,
+      headers: this.authService.getHeader(),
     });
   }
 
   public uniqueEmail(email: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/unique-email?email=${email}`;
-    return this.http.get<UserModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<UserModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 
   public profileDetail(id: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/${id}`;
-    return this.http.get<UserModel[]>(url, { headers: AuthService.headers });
+    return this.http.get<UserModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
   }
 }

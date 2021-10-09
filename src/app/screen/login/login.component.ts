@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.userForm.invalid) {
       return false;
     }
+    this.userService.signOut();
     this.user = [
       {
         email: this.userForm.value.email,
@@ -43,23 +44,14 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         this.userService.setToken(data.token);
         this.userService.setID(data.user._id);
-        this.setActive(data.user._id);
+
+        this.router.navigate(['/']);
       },
       (err: any) => {
         let { error } = err;
         this.errors = error.error;
       }
     );
-  }
-
-  private setActive(id: string): void {
-    if (!localStorage.getItem('token')) return;
-    this.userService
-      .updateProfile(id, [{ activeStatus: true }])
-      .subscribe((data: any) => {
-        this.userService.setActive(data.activeStatus);
-      });
-    this.router.navigate(['/']);
   }
 
   get email() {

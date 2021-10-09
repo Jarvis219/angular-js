@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
@@ -13,7 +13,6 @@ export class GuardService implements CanActivate {
     private userService: UserService
   ) {}
   canActivate(): boolean {
-    console.log(this.auth.isAuthenticated());
     if (!this.auth.isAuthenticated()) {
       this.userService.signOut();
       this.router.navigate(['login']);
