@@ -528,7 +528,7 @@ exports.signin = (req, res) => {
       _id: user._id
     }, process.env.JWT_SECRET);
     res.cookie('token', token, {
-      expire: new Date() + 1
+      expiresIn: '30s'
     });
 
     const {

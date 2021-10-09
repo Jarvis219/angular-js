@@ -8,7 +8,7 @@ import { LoginComponent } from '../login/login.component';
 import { MainComponent } from '../main/main.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
-
+import { GuardService } from 'src/app/services/guard.service';
 const routes: Routes = [
   {
     path: '',
@@ -16,13 +16,16 @@ const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'messenger', component: MessengerComponent },
-      { path: 'register', component: SignUpComponent },
-      { path: 'login', component: LoginComponent },
       { path: 'profile/:id', component: UserProfileComponent },
+      { path: 'page-404', component: Page404Component },
     ],
+    canActivate: [GuardService],
   },
+  { path: 'register', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'active-email', component: ActiveEmailComponent },
   { path: 'page-404', component: Page404Component },
+
   {
     path: '**',
     redirectTo: '/page-404',

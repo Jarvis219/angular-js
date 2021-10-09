@@ -25,7 +25,21 @@ import { LogoutComponent } from '../header/logout/logout.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
 import { GetShotTextPipe } from 'src/app/pipes/get-shot-text.pipe';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
+export function getAuthScheme(request: string) {
+  return 'http://localhost:4200/login ';
+}
+
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter,
+    authScheme: getAuthScheme,
+  };
+}
 @NgModule({
   declarations: [
     ClientComponent,
@@ -55,6 +69,12 @@ import { GetShotTextPipe } from 'src/app/pipes/get-shot-text.pipe';
     AngularFireStorageModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'cloud'),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+      },
+    }),
   ],
 })
 export class ClientModule {}
