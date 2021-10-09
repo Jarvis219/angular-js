@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommentModel } from '../model/comment-model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,9 @@ export class CommentService {
 
   public createComment(data: CommentModel[]): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/create`;
-    return this.http.post<CommentModel[]>(url, data[0]);
+    return this.http.post<CommentModel[]>(url, data[0], {
+      headers: AuthService.headers,
+    });
   }
 
   public updateComment(
@@ -26,12 +29,14 @@ export class CommentService {
   ): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/update/${id}`;
     return this.http.put<CommentModel[]>(url, data[0], {
-      headers: this.headers,
+      headers: AuthService.headers,
     });
   }
 
   public removeComment(id: string): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/remove/${id}`;
-    return this.http.delete<CommentModel[]>(url, { headers: this.headers });
+    return this.http.delete<CommentModel[]>(url, {
+      headers: AuthService.headers,
+    });
   }
 }

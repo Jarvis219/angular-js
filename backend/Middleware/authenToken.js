@@ -7,7 +7,6 @@ export const authToken = (req, res, next) => {
       error: 'token not match'
     })
   }
-  console.log(token);
   jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
 
     if (err) {
