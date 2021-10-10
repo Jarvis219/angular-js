@@ -432,6 +432,7 @@ img {
 .post__content {
   display: flex;
   position: relative;
+
 }
 .post__medias {
   display: flex;
@@ -881,10 +882,11 @@ img {
       display: flex;
     }
   }
+}
 
-  /*W3ubs.com - Download Free Responsive Website Layout Templates designed on HTML5 CSS3,
-Bootstrap which are 100% Mobile friendly. w3Hubs all Layouts are responsive cross 
-browser supported, best quality world class designs.*/
+/*W3ubs.com - Download Free Responsive Website Layout Templates designed on HTML5 CSS3,
+  Bootstrap which are 100% Mobile friendly. w3Hubs all Layouts are responsive cross 
+  browser supported, best quality world class designs.*/
   @import url("https://fonts.googleapis.com/css?family=Dancing+Script:400,700|Montserrat:300i,400,400i,500,600,700");
   body {
     padding: 0;
@@ -1108,6 +1110,7 @@ browser supported, best quality world class designs.*/
   /*Comment Detail*/
   .commentDetail {
     display: flex;
+    justify-content: center;
   }
 
   .commentDetail header {
@@ -1122,5 +1125,13 @@ browser supported, best quality world class designs.*/
     width: 70%;
     border-right: 1px solid gray;
   }
+
+  .commentDetail .commentDetail__footer {
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 8px 12px 18px;
+  }
+
   /*End Comment Popup*/
-}
